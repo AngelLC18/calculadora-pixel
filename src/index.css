@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+:root {
+  background-color: #ffe48d;
+  font-family: 'Silkscreen', sans-serif;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none
+}-
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 248px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  max-width: 1280px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+

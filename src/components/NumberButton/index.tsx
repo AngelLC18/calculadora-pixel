@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import { useDisplayContext } from "../../providers/DisplayProvider";
 import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider";
-//Componente que crea el botón para los números
+// Componente que crea el botón para los números
 export function NumberButton({
     number
 }: {
     number: string
 }) {
 
+    // Obtener el contexto de visualización
     const { digits, operation, slot1, slot2, isFloat, isError, isLargeNumber, setDigits, setSlot1, setSlot2, setIsNegative } = useDisplayContext();
 
+    // Obtener la función para mostrar el destello del contexto FlashDisplay
     const { handleDisplayFlash } = useFlashDisplayContext();
 
+    // Función para manejar el clic en el botón de número
     function handleClick() {
+        // Mostrar el destello
         handleDisplayFlash();
         if (!isError && !isLargeNumber) {
 
@@ -56,7 +60,7 @@ export function NumberButton({
         </>
     );
 }
-
+// Estilo del botón con Styled-Components
 const Button = styled.button<{ number: string }>`
     width: 44px;
     height: 40px;

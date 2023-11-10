@@ -1,24 +1,26 @@
 import { createContext, useContext, useState } from "react";
 
+// Definición de la interfaz del contexto con sus propiedades
 interface IDisplayContext {
-    operation: string | null
-    slot1: number | null
-    slot2: number | null
-    digits: string
-    isNegative: boolean
-    isFloat: boolean
-    isError: boolean
-    isLargeNumber: boolean
-    setSlot1: React.Dispatch<React.SetStateAction<number | null>>;
-    setSlot2: React.Dispatch<React.SetStateAction<number | null>>;
-    setDigits: React.Dispatch<React.SetStateAction<string>>;
-    setOperation: React.Dispatch<React.SetStateAction<string | null>>;
-    setIsNegative: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsFloat: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsError: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsLargeNumber: React.Dispatch<React.SetStateAction<boolean>>;
+    operation: string | null,  // La operación actual
+    slot1: number | null,  // El valor del primer operando
+    slot2: number | null,  // El valor del segundo operando
+    digits: string,  // Los dígitos en pantalla
+    isNegative: boolean,  // Indica si el número es negativo
+    isFloat: boolean,  // Indica si el número es decimal
+    isError: boolean,  // Indica si hay un error
+    isLargeNumber: boolean,  // Indica si el número es grande
+    setSlot1: React.Dispatch<React.SetStateAction<number | null>>;  // Función para actualizar slot1
+    setSlot2: React.Dispatch<React.SetStateAction<number | null>>;  // Función para actualizar slot2
+    setDigits: React.Dispatch<React.SetStateAction<string>>;  // Función para actualizar los dígitos
+    setOperation: React.Dispatch<React.SetStateAction<string | null>>;  // Función para actualizar la operación
+    setIsNegative: React.Dispatch<React.SetStateAction<boolean>>;  // Función para actualizar isNegative
+    setIsFloat: React.Dispatch<React.SetStateAction<boolean>>;  // Función para actualizar isFloat
+    setIsError: React.Dispatch<React.SetStateAction<boolean>>;  // Función para actualizar isError
+    setIsLargeNumber: React.Dispatch<React.SetStateAction<boolean>>;  // Función para actualizar isLargeNumber
 }
 
+// Creación del contexto con un valor predeterminado
 const DisplayContext = createContext<IDisplayContext>({
     operation: null,
     slot1: null,
@@ -37,7 +39,7 @@ const DisplayContext = createContext<IDisplayContext>({
     setIsError: () => false,
     setIsLargeNumber: () => false
 });
-
+// Componente proveedor del contexto
 export function DisplayProvider({ children }: { children: React.ReactNode }) {
 
     const [operation, setOperation] = useState<string | null>(null)

@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=swap");
 
 :root {
   background-color: #ffe48d;
-  font-family: 'Silkscreen', sans-serif;
+  font-family: "Silkscreen", sans-serif;
   color: white;
 }
 
@@ -13,9 +13,8 @@
 }
 
 ul {
-  list-style: none
-}-
-
+  list-style: none;
+}
 button {
   -webkit-tap-highlight-color: transparent;
 }
@@ -38,5 +37,3 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-

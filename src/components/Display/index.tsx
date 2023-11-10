@@ -1,12 +1,15 @@
-import styled from "styled-components"
-import { useDisplayContext } from "../../providers/DisplayProvider"
+import styled from "styled-components";
+import { useDisplayContext } from "../../providers/DisplayProvider";
 import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider";
 
+// Componente Display para mostrar los dígitos en la calculadora
 export function Display() {
 
-    const { digits, isNegative, isError } = useDisplayContext()
+    // Obtener valores del contexto de visualización y del contexto FlashDisplay
+    const { digits, isNegative, isError } = useDisplayContext();
     const { isDisplayOff } = useFlashDisplayContext();
 
+    // Función para determinar la posición en el sprite de números para un dígito
     function handleNumberSpritePosition(digit: string | undefined) {
         let response = 0;
         let digitWidth = 16;
@@ -30,7 +33,7 @@ export function Display() {
         return response * digitWidth
     }
 
-    return <>
+    return (
         <Container>
             <DisplayWrapper
                 style={{ zIndex: isDisplayOff ? "-1" : "1" }}
@@ -48,32 +51,33 @@ export function Display() {
                                 <Digit style={{ backgroundPosition: `-${handleNumberSpritePosition("0")}px 0` }} />
                                 <Digit style={{ backgroundPosition: `-${handleNumberSpritePosition("R")}px 0` }} />
                             </>
-                            :
-                            digits.split("").map((digit: string, index: number) =>
-                                digit !== "." &&
-                                <DigitContainer key={index}>
-                                    <Digit
-                                        style={{
-                                            backgroundPosition: `-${handleNumberSpritePosition(digit)}px 0`
-                                        }}
-                                    />
-                                    {digits[index + 1] === "." && <Dot />}
-                                </DigitContainer>
-                            )
+                            : digits.split("").map((digit: string, index: number) => (
+                                digit !== "." && (
+                                    <DigitContainer key={index}>
+                                        <Digit
+                                            style={{
+                                                backgroundPosition: `-${handleNumberSpritePosition(digit)}px 0`
+                                            }}
+                                        />
+                                        {digits[index + 1] === "." && <Dot />}
+                                    </DigitContainer>
+                                )
+                            ))
                     }
                 </Digits>
             </DisplayWrapper>
-        </Container >
-    </>
+        </Container>
+    );
 }
 
+// Estilo del contenedor principal
 const Container = styled.section`
     height: 52px;
     width: 192px;
     background-image: url("/assets/display.png");
-    
 `
 
+// Estilo del contenedor del display
 const DisplayWrapper = styled.div`
     height: 100%;
     width: 100%;
@@ -84,31 +88,38 @@ const DisplayWrapper = styled.div`
     position: relative;
 `
 
+// Estilo del contenedor de dígitos
 const DigitContainer = styled.div`
-    position: relative
+    position: relative;
 `
+
+// Estilo de la lista de dígitos
 const Digits = styled.ul`
     display: flex;
     justify-content: flex-end;
     gap: 4px;
 `
 
+// Estilo de un dígito
 const Digit = styled.li`
     height: 36px;
     width: 16px;
-    background-image: url("/assets/numbers-sprite.png")
+    background-image: url("/assets/numbers-sprite.png");
 `
+
+// Estilo del signo (positivo/negativo)
 const Sign = styled.div<{ negative: string }>`
     height: 36px;
     width: 16px;
-    background-image: url("/assets/minus-${props => props.negative === "true" ? "show" : "hide"}.png")
+    background-image: url("/assets/minus-${props => props.negative === "true" ? "show" : "hide"}.png");
 `
 
+// Estilo del punto decimal
 const Dot = styled.div`
     position: absolute;
     top: 0;
     left: 0;
     height: 36px;
     width: 20px;
-    background-image: url("/assets/num-dot.png")
+    background-image: url("/assets/num-dot.png");
 `

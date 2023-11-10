@@ -4,14 +4,16 @@ import { calcOperation } from "../../utils/calc-operation"
 import { displayLargeNumber, numberToDisplayString } from "../../utils/num-to-string"
 import { useFlashDisplayContext } from "../../providers/FlashDisplayProvider"
 import { largeNumberCheck } from "../../utils/large-number"
-//Componente que crea los botones de las funciones extras de la calculadora
+// Componente que crea los botones de las funciones extras de la calculadora
 interface IFunction {
-    func: "c" | "ce" | "sign" | "equal" | "dot" | "sqrt"
+    func: "c" | "ce" | "sign" | "equal" | "dot" | "sqrt";
 }
 
 export function FunctionButton({
     func
 }: IFunction) {
+
+    // Obtener el contexto de visualización
 
     const {
         slot1,
@@ -29,12 +31,15 @@ export function FunctionButton({
         isLargeNumber,
         setIsLargeNumber
     } = useDisplayContext()
+    // Obtener la función para mostrar el destello del contexto FlashDisplay
     const { handleDisplayFlash } = useFlashDisplayContext();
 
+    // Función para manejar el clic en el botón de función
     function handleClick() {
         handleDisplayFlash();
         switch (func) {
             case "c": {
+                // Limpiar todos los valores y estados
                 setSlot1(null)
                 setSlot2(null)
                 setOperation(null)
@@ -60,6 +65,7 @@ export function FunctionButton({
             case "sign": {
 
                 if (!isError && !isLargeNumber) {
+                    // Cambiar el signo del número actual
                     setIsNegative(prev => !prev)
 
                     if (slot1 !== null) {
@@ -76,11 +82,11 @@ export function FunctionButton({
             case "equal": {
                 if (!isError && !isLargeNumber) {
                     if (slot1 !== null && slot2 !== null && operation !== null) {
-
-                        let result = calcOperation(slot1, slot2, operation)
+                        // Realizar la operación y mostrar el resultado
+                        let result = calcOperation(slot1, slot2, operation);
                         if (isNaN(result) || !isFinite(result)) {
-                            setIsError(true)
-                            break
+                            setIsError(true);
+                            break;
                         }
 
                         if (largeNumberCheck(result)) {
@@ -121,11 +127,12 @@ export function FunctionButton({
                         result = slot1
                     }
 
-                    sqrt = Math.sqrt(result)
-                    if (isNaN(sqrt) || !isFinite(sqrt)) {
-                        setIsError(true)
-                        break
-                    }
+                     // Calcular la raíz cuadrada
+                     sqrt = Math.sqrt(result);
+                     if (isNaN(sqrt) || !isFinite(sqrt)) {
+                         setIsError(true);
+                         break;
+                     }
                     if (largeNumberCheck(result)) {
                         let answer = displayLargeNumber(result)
                         setDigits(answer)
@@ -168,7 +175,7 @@ export function FunctionButton({
         />
     </>
 }
-
+// Estilo del botón con Styled-Components
 const Button = styled.button <IFunction> `
     width: 44px;
     height: 40px;

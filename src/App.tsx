@@ -68,8 +68,11 @@ const rainbowMovement = keyframes`
   0% {
     background-position: 0% 50%;
   }
-  100% {
+  50% {
     background-position: 100% 50%;
+  }
+  100% {
+    background-position: 50% 0%;
   }
 `;
 
@@ -86,7 +89,7 @@ const Title = styled.h1`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   background-size: 200% 200%;
   background-repeat: no-repeat;
-  animation: ${zoomInAndOut} 3s infinite alternate, ${rainbowMovement} 5s linear infinite;
+  animation: ${zoomInAndOut} 3s infinite alternate, ${rainbowMovement} 3s infinite alternate
 `;
 
 const CalculatorWrapper = styled.div`
